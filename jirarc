@@ -9,6 +9,8 @@ alias jrmv='jira issues move'
 alias jrrm="jira issues delete"
 alias jric='jira issues create'
 alias jrcm='jira issue comment add'
+alias jrob='jira open'
+
 
 # Move Jira task to QA
 jrqa() {
