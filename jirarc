@@ -1,0 +1,33 @@
+#!/bin/bash
+
+alias jrme='jira sprint list --current --plain -a $(jira me)'
+alias jrall='jira issues list -a $(jira me)'
+alias jrcat='jira issue view'
+alias jra='jira issue assign'
+alias jrsl='jira sprint list --current'
+alias jrmv='jira issues move'
+alias jrrm="jira issues delete"
+alias jric='jira issues create'
+alias jrcm='jira issue comment add'
+
+# Move Jira task to QA
+jrqa() {
+  jira issues move "$1" "$QA_STATUS"
+  jira issues assign "$1" "$QA"
+}
+
+# Assign a task to yourself
+jram() {
+  jira issue assign "$1" $(jira me)
+}
+
+# Unassign a task
+jrua() {
+  jira issue assign "$1" x
+}
+
+# Mark task as done
+jrdone() {
+  jrmv "$1" "$RELEASE_STATUS"
+  jrua "$1"
+}
