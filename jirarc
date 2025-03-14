@@ -4,12 +4,12 @@ alias jrme='jira sprint list --current --plain -a $(jira me)'
 alias jrall='jira issues list -a $(jira me)'
 alias jrcat='jira issue view'
 alias jra='jira issue assign'
-alias jrsl='jira sprint list --current'
 alias jrmv='jira issues move'
 alias jrrm="jira issues delete"
 alias jric='jira issues create'
 alias jrcm='jira issue comment add'
 alias jrob='jira open'
+alias jrcs='jira sprint list --current'
 
 
 # Move Jira task to QA
@@ -32,4 +32,26 @@ jrua() {
 jrdone() {
   jrmv "$1" "$RELEASE_STATUS"
   jrua "$1"
+}
+
+jrhelp() {
+ cat <<EOF 
+  jrme   - Current sprint tasks assigned to you
+  jrall  - All tasks assigned to you
+  jrcat  - Get details on a task
+  jra    - Assign a task
+  jrmv   - Move task 
+  jrrm   - Delete task
+  jric   - Create task
+  jrcm   - Comment on a task
+  jrob   - Open jira board
+  jrcs   - List current sprint
+  
+  jrqa   - Send task and assign to QA 
+  jram   - Assign task to me 
+  jrua   - Unassign task from me
+  jrdone - Set task as Done
+  jrhelp - Show commands
+EOF
+
 }
