@@ -30,7 +30,7 @@ jrua() {
 
 # Mark task as done
 jrdone() {
-  jrmv "$1" "$RELEASE_STATUS"
+  jrmv "$1" "$DONE_STATUS"
   jrua "$1"
 }
 
@@ -55,3 +55,4 @@ jrhelp() {
 EOF
 
 }
+alias jr='jrhelp'
