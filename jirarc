@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -z "${QA}" ]; then
+  export QA="x"
+fi
+
 alias jrme='jira sprint list --current --plain -a $(jira me)'
 alias jrall='jira issues list -a $(jira me)'
 alias jrcat='jira issue view'
@@ -14,8 +18,10 @@ alias jrcs='jira sprint list --current'
 
 # Move Jira task to QA
 jrqa() {
+  worker=${2:-$QA}
+
   jira issues move "$1" "$QA_STATUS"
-  jira issues assign "$1" "$QA"
+  jira issues assign "$1" "$worker"
 }
 
 # Assign a task to yourself
@@ -33,25 +39,36 @@ jrdone() {
   jrmv "$1" "$DONE_STATUS"
   jrua "$1"
 }
+jready() {
+  jrmv "$1" "$RELEASE_STATUS"
+  jrua "$1"
+}
+
 
 jrhelp() {
  cat <<EOF 
-  jrme   - Current sprint tasks assigned to you
-  jrall  - All tasks assigned to you
-  jrcat  - Get details on a task
-  jra    - Assign a task
-  jrmv   - Move task 
-  jrrm   - Delete task
-  jric   - Create task
-  jrcm   - Comment on a task
-  jrob   - Open jira board
-  jrcs   - List current sprint
-  
-  jrqa   - Send task and assign to QA 
-  jram   - Assign task to me 
-  jrua   - Unassign task from me
-  jrdone - Set task as Done
-  jrhelp - Show commands
+  Requirements:
+    variable DONE_STATUS -> status of completion for the ticket (it is in prod & live)
+    variable RELEASE_STATUS -> status of development completion for the ticket (it is in dev & live only in dev)
+    variable QA -> email or identifier of QA (can be set to "x" for unassignment) 
+
+  Commands:
+    jrme   - Current sprint tasks assigned to you
+    jrall  - All tasks assigned to you
+    jrcat  - Get details on a task
+    jra    - Assign a task
+    jrmv   - Move task 
+    jrrm   - Delete task
+    jric   - Create task
+    jrcm   - Comment on a task
+    jrob   - Open jira board
+    jrcs   - List current sprint
+    
+    jrqa   - Send task and assign to QA 
+    jram   - Assign task to me 
+    jrua   - Unassign task from me
+    jrdone - Set task as Done
+    jrhelp - Show commands
 EOF
 
 }
