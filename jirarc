@@ -14,6 +14,7 @@ alias jric='jira issues create'
 alias jrcm='jira issue comment add'
 alias jrob='jira open'
 alias jrcs='jira sprint list --current'
+alias jrop='jira open'
 
 
 # Move Jira task to QA
@@ -22,6 +23,9 @@ jrqa() {
 
   jira issues move "$1" "$QA_STATUS"
   jira issues assign "$1" "$worker"
+}
+jrrw() {
+  jira issues move $1 $REVIEW_STATUS
 }
 
 # Assign a task to yourself
@@ -44,6 +48,10 @@ jready() {
   jrua "$1"
 }
 
+jrpr() {
+  jrmv "$1" "$PROGRESS_STATUS"
+}
+
 
 jrhelp() {
  cat <<EOF 
@@ -51,6 +59,8 @@ jrhelp() {
     variable DONE_STATUS -> status of completion for the ticket (it is in prod & live)
     variable RELEASE_STATUS -> status of development completion for the ticket (it is in dev & live only in dev)
     variable QA -> email or identifier of QA (can be set to "x" for unassignment) 
+    variable REVIEW_STATUS -> the state in which tasks are set for review
+    variable PROGRESS_STATUS -> the state in which tasks actively worked on
 
   Commands:
     jrme   - Current sprint tasks assigned to you
@@ -63,6 +73,9 @@ jrhelp() {
     jrcm   - Comment on a task
     jrob   - Open jira board
     jrcs   - List current sprint
+    jrrw   - Set task for review
+    jrpr   - Set task for as "currently worked on"o
+    jrop   - Open Jira
     
     jrqa   - Send task and assign to QA 
     jram   - Assign task to me 
