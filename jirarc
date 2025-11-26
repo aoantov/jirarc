@@ -8,14 +8,12 @@ alias jrme='jira sprint list --current --plain -a $(jira me)'
 alias jrall='jira issues list -a $(jira me)'
 alias jrcat='jira issue view'
 alias jra='jira issue assign'
-alias jrmv='jira issues move'
-alias jrrm="jira issues delete"
+alias jrmv='jira issues move' alias jrrm="jira issues delete"
 alias jric='jira issues create'
 alias jrcm='jira issue comment add'
 alias jrob='jira open'
 alias jrcs='jira sprint list --current'
 alias jrop='jira open'
-
 
 # Move Jira task to QA
 jrqa() {
@@ -52,9 +50,26 @@ jrpr() {
   jrmv "$1" "$PROGRESS_STATUS"
 }
 
+jrgck() {
+  START=$1
+  END=$2
+
+  if [ $# -eq 2 ]; then
+    git --no-pager log "$START"..."$END" --pretty=oneline | awk '{print $2}' | while read -r commit; do
+      number=$(echo "$commit" | sed 's/.*-//; s/):$//')
+      if [[ "$number" =~ ^[1-9][0-9]*$ ]]; then
+        check_status=$(jira issue view "$number" --raw | jq '.fields.status.name')
+        echo "$number: $check_status"
+      fi
+    done
+  else
+
+    echo "Usage: $0 <param1> <param2>"
+  fi
+}
 
 jrhelp() {
- cat <<EOF 
+  cat <<EOF
   Requirements:
     variable DONE_STATUS -> status of completion for the ticket (it is in prod & live)
     variable RELEASE_STATUS -> status of development completion for the ticket (it is in dev & live only in dev)
@@ -81,6 +96,7 @@ jrhelp() {
     jram   - Assign task to me 
     jrua   - Unassign task from me
     jrdone - Set task as Done
+    jrgck  - Check statuses of list of jira issues from commits (requirement: commits should be based on the semantic-relase style of committing)
     jrhelp - Show commands
 EOF
 
