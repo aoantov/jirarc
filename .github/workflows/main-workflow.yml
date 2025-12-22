@@ -1,4 +1,4 @@
-name: "Test CMP Backend Reuse Workflow"
+name: "JiraRC Release Workflow"
 
 on:
   push:
