@@ -4,7 +4,9 @@
     ],
     "tagFormat": "v${version}",
     "plugins": [
-        "@semantic-release/commit-analyzer"
+
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/github"
     ]
 }
 

@@ -11,12 +11,22 @@
 
 - Download the repository in your Oh My Zsh custom plugins folder (usually `~/.oh-my-zsh/custom/plugins/`)
 
+```bash
+git clone https://github.com/aoantov/jirarc.git && mv jirarc ~/.oh-my-zsh/custom/plugins/jirarc
+```
+
+- Add `jirarc` to the plugins list in your `~/.zshrc` file
+
+```bash
+# Add Optionals here
+plugins=(... jirarc)
+```
+
 ## Optionals
 
 ##### Some commands are based on the column state. To rapidly move issues using some commands you have to define the following variables. All variables are optional
 
 ```
-
  export IN_PROGRESS_STATUS = '<In Progress Column Name>'
  export DONE_STATUS = '<Done Column Name>'
  export TO_DO_STATUS = '<To Do Column Name>'
