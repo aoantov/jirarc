@@ -1,0 +1,24 @@
+name: "Test CMP Backend Reuse Workflow"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-plan-deploy:
+    runs-on: "ubuntu-22.04"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: "Release new version"
+        uses: cycjimmy/semantic-release-action@v3
+        with:
+          branch: main
+          extra_plugins: |
+            @semantic-release/changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_URL: "https://github.com/aoantov/jirarc.git"
