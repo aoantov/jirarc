@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
 jobs:
   test-plan-deploy:
     runs-on: "ubuntu-22.04"
@@ -17,8 +19,6 @@ jobs:
         uses: cycjimmy/semantic-release-action@v3
         with:
           branch: main
-          extra_plugins: |
-            @semantic-release/changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_URL: "https://github.com/aoantov/jirarc.git"
