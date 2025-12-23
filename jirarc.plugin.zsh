@@ -119,7 +119,7 @@ alias jrcm='jira issue comment add'
 alias jrcs='jira sprint list --current'
 alias jrop='jira open'
 
-alias jr='jrhelp'
+alias jrhelp='jr'
 
 
 # Unset functions if corresponding status IDs are not set
