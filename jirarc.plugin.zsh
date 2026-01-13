@@ -36,13 +36,23 @@ function jram() {
   jira issue assign "$1" $(jira me)
 }
 
+function jrrt() {
+  if [ -z "$1" ]; then
+    echo "Usage: jrrt <issue-key>"
+    return 1
+  fi
+
+  jira issue move "$1" "$to_do_status" && jira issue assign "$1" "$emtpy_user"
+   
+}
+
 function jrtd() {
   if [ -z "$1" ]; then
     echo "Usage: jrtd <issue-key>"
     return 1
   fi
 
-  jira issue move "$1" "$to_do_status" && jira issue assign "$1" "$empty_user"
+  jira issue move "$1" "$to_do_status" && jira issue assign "$1" $(jira me)
 }
 
 function jrpr() {
@@ -57,7 +67,7 @@ function jrdn() {
     return 1
   fi
 
-  jira issue move "$1" "$done_status" && jira issue assign "$1" $(jira me)
+  jira issue move "$1" "$done_status" && jira issue assign "$1" "$empty_user"
 }
 
 function jrqa() {
@@ -98,6 +108,7 @@ function jr() {
   - jrop <issue-key>: Open an issue in the web browser
   - jrua <issue-key>: Unassign an issue (assign to empty user)
   - jram <issue-key>: Assign an issue to me
+  - jrrt <issue-key>: Remove assignment from issue & return to To Do status column
   - jrrw(^) <issue-key>: Move an issue to 'Review' status
   - jrtd(*) <issue-key>: Move an issue to 'To Do' status and unassign
   - jrpr(+) <issue-key>: Move an issue to 'In Progress' status and assign to me
