@@ -7,7 +7,6 @@ done_status=$DONE_STATUS
 qa_status=$QA_STATUS
 qa_user=$QA_USER
 
-# Custom methods
 function jrua() {
   if [ -z "$1" ]; then
     echo "Usage: jrua <issue-key>"
@@ -58,8 +57,6 @@ function jrtd() {
 function jrpr() {
   jira issue move "$1" "$in_progress_status" && jira issue assign "$1" $(jira me)
 }
-
-
 
 function jrdn() {
   if [ -z "$1" ]; then
@@ -129,7 +126,6 @@ alias jric='jira issues create'
 alias jrcm='jira issue comment add'
 alias jrcs='jira sprint list --current'
 alias jrop='jira open'
-
 alias jrhelp='jr'
 
 
