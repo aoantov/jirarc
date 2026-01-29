@@ -91,6 +91,7 @@ function jr() {
     (Place before loading of plugins)
     - IN_PROGRESS_STATUS +
     - DONE_STATUS -
+    - BLOCKED_STATUS &
     - TO_DO_STATUS *
     - REVIEW_STATUS ^
     - QA_STATUS v
@@ -116,6 +117,7 @@ function jr() {
   - jrtd(*) <issue-key>: Move an issue to 'To Do' status and unassign
   - jrpr(+) <issue-key>: Move an issue to 'In Progress' status and assign to me
   - jrdn(-) <issue-key>: Move an issue to 'Done'
+  - jrbk(&) <issue-key>: Move an issue to 'Blocked' status
   - jrqa(v): Move an issue to 'QA' status and assign to QA user
 EOF
 }
@@ -130,7 +132,8 @@ alias jrmv='jira issues move'
 alias jrrm="jira issues delete"
 alias jric='jira issues create'
 alias jrcm='jira issue comment add'
-alias jrcs='jira sprint list --current'
+alias jrcs='jira sprint list --current --plain'
+alias jrics='jira sprint list --current'
 alias jrop='jira open'
 
 alias jrhelp='jr'
