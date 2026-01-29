@@ -2,6 +2,7 @@ empty_user="x"
 
 in_progress_status=$IN_PROGRESS_STATUS
 to_do_status=$TO_DO_STATUS
+blocked_status=$BLOCKED_STATUS
 review_status=$REVIEW_STATUS
 done_status=$DONE_STATUS
 qa_status=$QA_STATUS
@@ -59,7 +60,9 @@ function jrpr() {
   jira issue move "$1" "$in_progress_status" && jira issue assign "$1" $(jira me)
 }
 
-
+function jrbk() {
+  jira issue move "$1" "$blocked_status"
+}
 
 function jrdn() {
   if [ -z "$1" ]; then
@@ -157,5 +160,10 @@ fi
 if [ -z $qa_status ] || [ -z $qa_user ]
 then
   unset -f jrqa
+fi
+
+if [ -z $blocked_status ]
+then
+  unset -f jrbk
 fi
 
