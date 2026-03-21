@@ -44,8 +44,9 @@ plugins=(... jirarc)
 ## Commands
 
 - jrme: List issues in the current sprint assigned to me
-- jrime: List issues in the current sprint assigned to me (with details)
+- jrime: List issues in the current sprint assigned to me (interactive)
 - jrall: List all issues assigned to me
+- jriall: List all issues assigned to me (interactive)
 - jrcat: \<issue-key\>: View details of a specific issue
 - jra: \<issue-key\>: Assign an issue to a user
 - jrmv: \<issue-key\>: Move an issue to a different status
@@ -53,10 +54,12 @@ plugins=(... jirarc)
 - jric: Create a new issue
 - jrcm: \<issue-key\> \<comment\>: Add a comment to an issue
 - jrcs: List issues in the current sprint
+- jrics: List issues in the current sprint (interactive)
 - jrop: \<issue-key\>: Open an issue in the web browser
 - jrua: \<issue-key\>: Unassign an issue (assign to empty user)
 - jram: \<issue-key\>: Assign an issue to me
 - jrrw: \<issue-key\>: Move an issue to 'Review' status
+- jrbk: \<issue-key\>: Move an issue back to 'Blocked' status
 - jrtd: \<issue-key\>: Move an issue to 'To Do' status and unassign
 - jrpr: \<issue-key\>: Move an issue to 'In Progress' status and assign to me
 - jrdn: \<issue-key\>: Move an issue to 'Done'
