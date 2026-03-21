@@ -1,14 +1,13 @@
-empty_user="x"
+ empty_user="x"
 
-in_progress_status=$IN_PROGRESS_STATUS
-to_do_status=$TO_DO_STATUS
-blocked_status=$BLOCKED_STATUS
-review_status=$REVIEW_STATUS
-done_status=$DONE_STATUS
-qa_status=$QA_STATUS
-qa_user=$QA_USER
+ in_progress_status=$IN_PROGRESS_STATUS
+ to_do_status=$TO_DO_STATUS
+ blocked_status=$BLOCKED_STATUS
+ review_status=$REVIEW_STATUS
+ done_status=$DONE_STATUS
+ qa_status=$QA_STATUS
+ qa_user=$QA_USER
 
-# Custom methods
 function jrua() {
   if [ -z "$1" ]; then
     echo "Usage: jrua <issue-key>"
@@ -37,15 +36,6 @@ function jram() {
   jira issue assign "$1" $(jira me)
 }
 
-function jrrt() {
-  if [ -z "$1" ]; then
-    echo "Usage: jrrt <issue-key>"
-    return 1
-  fi
-
-  jira issue move "$1" "$to_do_status" && jira issue assign "$1" "$emtpy_user"
-   
-}
 
 function jrtd() {
   if [ -z "$1" ]; then
@@ -99,6 +89,7 @@ function jr() {
 
 
   Commands:
+  - jr/jrhelp: Show this help message
   - jrme: List issues in the current sprint assigned to me
   - jrime: List issues in the current sprint assigned to me (with details)
   - jrall: List all issues assigned to me
@@ -107,12 +98,12 @@ function jr() {
   - jrmv <issue-key>: Move an issue to a different status
   - jrrm <issue-key>: Remove (delete) an issue
   - jric: Create a new issue
+  - jrics: List current sprint 
   - jrcm <issue-key> <comment>: Add a comment to an issue
   - jrcs: List issues in the current sprint
   - jrop <issue-key>: Open an issue in the web browser
   - jrua <issue-key>: Unassign an issue (assign to empty user)
   - jram <issue-key>: Assign an issue to me
-  - jrrt <issue-key>: Remove assignment from issue & return to To Do status column
   - jrrw(^) <issue-key>: Move an issue to 'Review' status
   - jrtd(*) <issue-key>: Move an issue to 'To Do' status and unassign
   - jrpr(+) <issue-key>: Move an issue to 'In Progress' status and assign to me
@@ -125,7 +116,8 @@ EOF
 # Aliases for jira commands
 alias jrme='jira sprint list --current --plain -a $(jira me)'
 alias jrime='jira sprint list --current -a $(jira me)'
-alias jrall='jira issues list -a $(jira me)'
+alias jrall='jira issues list --plain -a $(jira me)'
+alias jriall='jira issues list -a $(jira me)'
 alias jrcat='jira issue view'
 alias jra='jira issue assign'
 alias jrmv='jira issues move'
