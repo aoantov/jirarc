@@ -1,12 +1,12 @@
- empty_user="x"
+empty_user="x"
 
- in_progress_status=$IN_PROGRESS_STATUS
- to_do_status=$TO_DO_STATUS
- blocked_status=$BLOCKED_STATUS
- review_status=$REVIEW_STATUS
- done_status=$DONE_STATUS
- qa_status=$QA_STATUS
- qa_user=$QA_USER
+in_progress_status=$IN_PROGRESS_STATUS
+to_do_status=$TO_DO_STATUS
+blocked_status=$BLOCKED_STATUS
+review_status=$REVIEW_STATUS
+done_status=$DONE_STATUS
+qa_status=$QA_STATUS
+qa_user=$QA_USER
 
 function jrua() {
   if [ -z "$1" ]; then
@@ -25,7 +25,6 @@ function jrrw() {
 
   jira issue move "$1" "$review_status"
 }
-
 
 function jram() {
   if [ -z "$1" ]; then
@@ -86,7 +85,6 @@ function jr() {
     - REVIEW_STATUS ^
     - QA_STATUS v
     - QA_USER v
-
 
   Commands:
     - jrme: List issues in the current sprint assigned to me
