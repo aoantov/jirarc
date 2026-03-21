@@ -18,7 +18,7 @@ function jrua() {
   jira issue assign "$1" "$empty_user"
 }
 
-# @desc: Move an issue to 'Review' status
+# @desc: Move an issue to 'Review' status (REVIEW_STATUS needed)
 function jrrw() {
   if [ -z "$1" ]; then
     echo "Usage: jrrw <issue-key>"
@@ -38,7 +38,7 @@ function jram() {
   jira issue assign "$1" $(jira me)
 }
 
-# @desc: Move an issue to 'To Do' status and unassign
+# @desc: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
 function jrtd() {
   if [ -z "$1" ]; then
     echo "Usage: jrtd <issue-key>"
@@ -48,17 +48,17 @@ function jrtd() {
   jira issue move "$1" "$to_do_status" && jira issue assign "$1" $(jira me)
 }
 
-# @desc: Move an issue to 'In Progress' status and assign to me
+# @desc: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
 function jrpr() {
   jira issue move "$1" "$in_progress_status" && jira issue assign "$1" $(jira me)
 }
 
-# @desc: Move an issue back to 'Blocked' status
+# @desc: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
 function jrbk() {
   jira issue move "$1" "$blocked_status"
 }
 
-# @desc: Move an issue to 'Done' status and unassign
+# @desc: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
 function jrdn() {
   if [ -z "$1" ]; then
     echo "Usage: jrdn <issue-key>"
@@ -68,7 +68,7 @@ function jrdn() {
   jira issue move "$1" "$done_status" && jira issue assign "$1" "$empty_user"
 }
 
-# @desc: Move an issue to 'QA' status and assign to QA user
+# @desc: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
 function jrqa() {
   if [ -z "$1" ]; then
     echo "Usage: jrdn <issue-key>"
@@ -80,42 +80,42 @@ function jrqa() {
 
 function jr() {
   cat <<EOF 
-  Requirements:
+ Requirements:
    - jira-cli 
 
   Optional:
     (Place before loading of plugins)
-    - IN_PROGRESS_STATUS +
-    - DONE_STATUS -
-    - BLOCKED_STATUS &
-    - TO_DO_STATUS *
-    - REVIEW_STATUS ^
-    - QA_STATUS v
-    - QA_USER v
+    - IN_PROGRESS_STATUS
+    - DONE_STATUS
+    - BLOCKED_STATUS
+    - TO_DO_STATUS
+    - REVIEW_STATUS
+    - QA_STATUS
+    - QA_USER
 
   Commands:
     - jrua: Unassign an issue (assign to empty user)
-    - jrrw: Move an issue to 'Review' status
+    - jrrw: Move an issue to 'Review' status (REVIEW_STATUS needed)
     - jram: Assign an issue to me
-    - jrtd: Move an issue to 'To Do' status and unassign
-    - jrpr: Move an issue to 'In Progress' status and assign to me
-    - jrbk: Move an issue back to 'Blocked' status
-    - jrdn: Move an issue to 'Done' status and unassign
-    - jrqa: Move an issue to 'QA' status and assign to QA user
-    - jrme='jira sprint list --current --plain -a $: List issues in the current sprint assigned to me
-    - jrime='jira sprint list --current -a $: List issues in the current sprint assigned to me (interactive)
-    - jrall='jira issues list --plain -a $: List all issues assigned to me
-    - jriall='jira issues list -a $: List all issues assigned to me (interactive)
-    - jrcat='jira issue view': View details of a specific issue
-    - jra='jira issue assign': Assign an issue to a user
-    - jrmv='jira issues move': Move an issue to a different status
-    - jrrm="jira issues delete": Remove (delete) an issue
-    - jric='jira issues create': Create a new issue
-    - jrcm='jira issue comment add': Add a comment to an issue
-    - jrcs='jira sprint list --current --plain': List issues in the current sprint
-    - jrics='jira sprint list --current': List issues in the current sprint (interactive)
-    - jrop='jira open': Open an issue in the web browser
-    - jrhelp='jr': Show help for JiraRC commands
+    - jrtd: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
+    - jrpr: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
+    - jrbk: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
+    - jrdn: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
+    - jrqa: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
+    - jrme: List issues in the current sprint assigned to me
+    - jrime: List issues in the current sprint assigned to me (interactive)
+    - jrall: List all issues assigned to me
+    - jriall: List all issues assigned to me (interactive)
+    - jrcat: View details of a specific issue
+    - jra: Assign an issue to a user
+    - jrmv: Move an issue to a different status
+    - jrrm: Remove (delete) an issue
+    - jric: Create a new issue
+    - jrcm: Add a comment to an issue
+    - jrcs: List issues in the current sprint
+    - jrics: List issues in the current sprint (interactive)
+    - jrop: Open an issue in the web browser
+    - jrhelp: Show help for JiraRC commands
 EOF
 }
 

@@ -24,8 +24,8 @@ local help_aliases=$(
     getline                       # read next line (should be alias)
     if ($0 ~ /^alias[[:space:]]+[a-zA-Z0-9_]+/) {
       fn = $0
-      sub(/^alias[[:space:]]+/, "", fn)   # remove "function " prefix
-      sub(/\(.*/, "", fn)                     # remove everything after (
+      sub(/^alias[[:space:]]+/, "", fn)   # remove "alias " prefix
+      sub(/=.*/, "", fn)
       print "    - " fn ": " desc
     }
   }
@@ -38,13 +38,13 @@ cat <<EOF
 
   Optional:
     (Place before loading of plugins)
-    - IN_PROGRESS_STATUS +
-    - DONE_STATUS -
-    - BLOCKED_STATUS &
-    - TO_DO_STATUS *
-    - REVIEW_STATUS ^
-    - QA_STATUS v
-    - QA_USER v
+    - IN_PROGRESS_STATUS
+    - DONE_STATUS
+    - BLOCKED_STATUS
+    - TO_DO_STATUS
+    - REVIEW_STATUS
+    - QA_STATUS
+    - QA_USER
 
   Commands:
 $help_functions
