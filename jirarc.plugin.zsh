@@ -1,3 +1,9 @@
+# Check dependencies
+if (( ! ${+commands[jira]} )); then
+    print "[jirarc] Error: 'jira-cli' is required but not installed" >&2
+    return 1
+fi
+
 empty_user="x"
 
 in_progress_status=$IN_PROGRESS_STATUS
