@@ -44,6 +44,29 @@ function jram() {
   jira issue assign "$1" $(jira me)
 }
 
+# @desc: Add task/story/... to current sprint
+function jracs() {
+  if [ -z "$1" ]; then
+    echo "Usage: jracs <issue-key>"
+    return 1
+  fi
+
+  local current_sprint_id = $(jira sprint list --state active --columns id --no-header | sed -n 's2p')
+  jira sprint add $current_sprint_id "$1"
+}
+
+# @desc: Add task/story/... to current sprint
+function jracs() {
+  if [ -z "$1" ]; then
+    echo "Usage: jracs <issue-key>"
+    return 1
+  fi
+
+  local current_sprint_id = $(jira sprint list --state active --columns id --no-header | sed -n 's2p')
+  
+  # TODO: add to current sprint actual jira cli command HERE
+}
+
 # @desc: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
 function jrtd() {
   if [ -z "$1" ]; then
@@ -130,6 +153,12 @@ EOF
 # @desc: List issues in the current sprint assigned to me
 alias jrme='jira sprint list --current --plain -a $(jira me)'
 
+# @desc: List epics in the current sprint
+alias jrel='jira epic list --table --plain'
+
+# @desc: List epics in the current sprint (interactive)
+alias jriel='jira epic list'
+
 # @desc: List issues in the current sprint assigned to me (interactive)
 alias jrime='jira sprint list --current -a $(jira me)'
 
@@ -153,6 +182,9 @@ alias jrrm="jira issues delete"
 
 # @desc: Create a new issue
 alias jric='jira issues create'
+
+# @desc: Create a new epic 
+alias jrec='jira epic add'
 
 # @desc: Add a comment to an issue
 alias jrcm='jira issue comment add'
