@@ -24,6 +24,16 @@ function jrua() {
   jira issue assign "$1" "$empty_user"
 }
 
+# @desc: Edit an issue
+function jre() {
+  if [ -z "$1" ]; then
+    echo "Usage: jre <issue-key>"
+    return 1
+  fi
+
+  jira issue edit "$1"
+}
+
 # @desc: Move an issue to 'Review' status (REVIEW_STATUS needed)
 function jrrw() {
   if [ -z "$1" ]; then
@@ -44,7 +54,7 @@ function jram() {
   jira issue assign "$1" $(jira me)
 }
 
-# @desc: Add task/story/... to current sprint
+# @desc: Add issue to current sprint
 function jracs() {
   if [ -z "$1" ]; then
     echo "Usage: jracs <issue-key>"
@@ -53,18 +63,6 @@ function jracs() {
 
   local current_sprint_id = $(jira sprint list --state active --columns id --no-header | sed -n 's2p')
   jira sprint add $current_sprint_id "$1"
-}
-
-# @desc: Add task/story/... to current sprint
-function jracs() {
-  if [ -z "$1" ]; then
-    echo "Usage: jracs <issue-key>"
-    return 1
-  fi
-
-  local current_sprint_id = $(jira sprint list --state active --columns id --no-header | sed -n 's2p')
-  
-  # TODO: add to current sprint actual jira cli command HERE
 }
 
 # @desc: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
@@ -109,8 +107,8 @@ function jrqa() {
 
 function jr() {
   cat <<EOF 
- Requirements:
-   - jira-cli 
+  Requirements:
+   - jira-cli
 
   Optional:
     (Place before loading of plugins)
@@ -124,22 +122,29 @@ function jr() {
 
   Commands:
     - jrua: Unassign an issue (assign to empty user)
+    - jre: Edit an issue
     - jrrw: Move an issue to 'Review' status (REVIEW_STATUS needed)
     - jram: Assign an issue to me
+    - jracs: Add issue to current sprint
     - jrtd: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
     - jrpr: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
     - jrbk: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
     - jrdn: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
     - jrqa: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
     - jrme: List issues in the current sprint assigned to me
+    - jrel: List epics in the current sprint
+    - jriel: List epics in the current sprint (interactive)
     - jrime: List issues in the current sprint assigned to me (interactive)
     - jrall: List all issues assigned to me
     - jriall: List all issues assigned to me (interactive)
     - jrcat: View details of a specific issue
     - jra: Assign an issue to a user
+    - jrd: Delete an issue
     - jrmv: Move an issue to a different status
     - jrrm: Remove (delete) an issue
     - jric: Create a new issue
+    - jrls: List top 50 sprints
+    - jrec: Create a new epic
     - jrcm: Add a comment to an issue
     - jrcs: List issues in the current sprint
     - jrics: List issues in the current sprint (interactive)
@@ -174,6 +179,9 @@ alias jrcat='jira issue view'
 # @desc: Assign an issue to a user
 alias jra='jira issue assign'
 
+# @desc: Delete an issue
+alias jrd='jira issue delete'
+
 # @desc: Move an issue to a different status
 alias jrmv='jira issues move'
 
@@ -182,6 +190,9 @@ alias jrrm="jira issues delete"
 
 # @desc: Create a new issue
 alias jric='jira issues create'
+
+# @desc: List top 50 sprints
+alias jrls='jira sprint list --table --plain'
 
 # @desc: Create a new epic 
 alias jrec='jira epic add'
