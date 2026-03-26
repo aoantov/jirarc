@@ -49,5 +49,4 @@ cat <<EOF
   Commands:
 $help_functions
 $help_aliases
-
 EOF
