@@ -144,6 +144,7 @@ function jr() {
     - jrrm: Remove (delete) an issue
     - jric: Create a new issue
     - jrls: List top 50 sprints
+    - jrils: List top 50 sprints (interactive)
     - jrec: Create a new epic
     - jreu: Unassign epic from an issue
     - jrcm: Add a comment to an issue
@@ -194,6 +195,9 @@ alias jric='jira issues create'
 
 # @desc: List top 50 sprints
 alias jrls='jira sprint list --table --plain'
+
+# @desc: List top 50 sprints (interactive)
+alias jrils='jira sprint list'
 
 # @desc: Create a new epic 
 alias jrec='jira epic add'
