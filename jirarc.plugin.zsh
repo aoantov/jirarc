@@ -85,6 +85,16 @@ function jrbk() {
   jira issue move "$1" "$blocked_status"
 }
 
+# @desc: List available issues in current sprint (TO_DO_STATUS needed)
+function jrav() {
+  jira sprint list -a "$empty_user" -s "$to_do_status" --current --plain
+}
+
+# @desc: List available issues in current sprint (TO_DO_STATUS needed, interactive)
+function jriav() {
+  jira sprint list -a "$empty_user" -s "$to_do_status" --current
+}
+
 # @desc: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
 function jrdn() {
   if [ -z "$1" ]; then
@@ -129,6 +139,8 @@ function jr() {
     - jrtd: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
     - jrpr: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
     - jrbk: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
+    - jrav: List available issues in current sprint (TO_DO_STATUS needed)
+    - jriav: List available issues in current sprint (TO_DO_STATUS needed, interactive)
     - jrdn: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
     - jrqa: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
     - jrme: List issues in the current sprint assigned to me
@@ -235,6 +247,8 @@ fi
 if [ -z $to_do_status ]
 then
   unset -f jrtd
+  unset -f jrav 
+  unset -f jriav 
 fi
 
 if [ -z $review_status ]
