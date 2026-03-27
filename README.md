@@ -12,13 +12,13 @@
 - Download the repository in your Oh My Zsh custom plugins folder (usually `~/.oh-my-zsh/custom/plugins/`)
 
 ```bash
-cd ~/.oh-my-zsh/custom/plugins/ && git clone https://github.com/aoantov/jirarc.git
+git clone https://github.com/aoantov/jirarc.git ~/.oh-my-zsh/custom/plugins/jirarc
 ```
 
 Or
 
 ```bash
-git clone https://github.com/aoantov/jirarc.git && ln -s $(pwd)/jirarc ~/.oh-my-zsh/custom/plugins/jirarc
+git clone https://github.com/aoantov/jirarc.git ~/.oh-my-zsh/custom/plugins/jirarc && ln -s $(pwd)/jirarc ~/.oh-my-zsh/custom/plugins/jirarc
 ```
 
 - Add `jirarc` to the plugins list in your `~/.zshrc` file

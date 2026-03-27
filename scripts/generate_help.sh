@@ -1,6 +1,10 @@
 #!/bin/zsh
 
 local script_file="${1:-jirarc.plugin.zsh}"
+local bold="\\e[1m"
+local return_color="\\e[0m"
+local red="\\e[31m"
+local spacing_header="  "
 
 local help_functions=$(
   awk '
@@ -32,12 +36,11 @@ local help_aliases=$(
 ' $script_file
 )
 
-cat <<EOF
-  Requirements:
+local help_info="${spacing_header}${bold}Required${return_color}
    ○ jira-cli 
 
-  Optional:
-    (Place before loading of plugins)
+${spacing_header}${bold}Optional${return_color}
+    ${red}Note:${return_color} Place before loading of plugins
     ○ IN_PROGRESS_STATUS
     ○ DONE_STATUS
     ○ BLOCKED_STATUS
@@ -46,7 +49,13 @@ cat <<EOF
     ○ QA_STATUS
     ○ QA_USER
 
-  Commands:
+${spacing_header}${bold}Commands${return_color}
 $help_functions
 $help_aliases
-EOF
+"
+
+printf "
+ function jr() {
+   printf \"$help_info\"
+ }
+"
