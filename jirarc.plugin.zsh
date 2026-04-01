@@ -1,4 +1,4 @@
-PLUGIN_DIR="${0:A:h}"
+local PLUGIN_DIR="${0:A:h}"
 source "$PLUGIN_DIR/help.generated.zsh"
 
 empty_user="x"

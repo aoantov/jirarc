@@ -9,7 +9,8 @@ local spacing_header="  "
 local help_functions=$(
   awk '
   /# @desc:/ {
-    desc = substr($0, 10)       # extract the description
+    desc = $0
+    sub(/[ ]*# @desc:[ ]*/, "", desc)  # remove "# @desc: " prefix
     getline                       # read next line (should be function)
     if ($0 ~ /function[[:space:]]+[a-zA-Z0-9_]+/) {
       fn = $0
@@ -24,7 +25,8 @@ local help_functions=$(
 local help_aliases=$(
   awk '
   /# @desc:/ {
-    desc = substr($0, 10)       # extract the description
+    desc = $0
+    sub(/[ ]*# @desc:[ ]*/, "", desc)  # remove "# @desc: " prefix
     getline                       # read next line (should be alias)
     if ($0 ~ /[ ]*alias[[:space:]]+[a-zA-Z0-9_]+/) {
       fn = $0
