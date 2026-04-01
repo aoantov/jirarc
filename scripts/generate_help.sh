@@ -8,12 +8,12 @@ local spacing_header="  "
 
 local help_functions=$(
   awk '
-  /^# @desc:/ {
+  /# @desc:/ {
     desc = substr($0, 10)       # extract the description
     getline                       # read next line (should be function)
-    if ($0 ~ /^function[[:space:]]+[a-zA-Z0-9_]+/) {
+    if ($0 ~ /function[[:space:]]+[a-zA-Z0-9_]+/) {
       fn = $0
-      sub(/^function[[:space:]]+/, "", fn)   # remove "function " prefix
+      sub(/[ ]*function[[:space:]]+/, "", fn)   # remove "function " prefix
       sub(/\(.*/, "", fn)                     # remove everything after (
       print "    ○ " fn ": " desc
     }
@@ -23,12 +23,12 @@ local help_functions=$(
 
 local help_aliases=$(
   awk '
-  /^# @desc:/ {
+  /# @desc:/ {
     desc = substr($0, 10)       # extract the description
     getline                       # read next line (should be alias)
-    if ($0 ~ /^alias[[:space:]]+[a-zA-Z0-9_]+/) {
+    if ($0 ~ /[ ]*alias[[:space:]]+[a-zA-Z0-9_]+/) {
       fn = $0
-      sub(/^alias[[:space:]]+/, "", fn)   # remove "alias " prefix
+      sub(/[ ]*alias[[:space:]]+/, "", fn)   # remove "alias " prefix
       sub(/=.*/, "", fn)
       print "    ○ " fn ": " desc
     }
