@@ -2,8 +2,8 @@
 
 local script_file="${1:-jirarc.plugin.zsh}"
 local bold="\\e[1m"
-local return_color="\\e[0m"
-local red="\\e[31m"
+local base_color="\\e[0m"
+local red_color="\\e[31m"
 local spacing_header="  "
 
 local help_functions=$(
@@ -38,20 +38,20 @@ local help_aliases=$(
 ' $script_file
 )
 
-local help_info="${spacing_header}${bold}Required${return_color}
+local help_info="${spacing_header}${bold}Required${base_color}
    ○ jira-cli 
 
-${spacing_header}${bold}Optional${return_color}
-    ${red}Note:${return_color} Place before loading of plugins
-    ○ IN_PROGRESS_STATUS
-    ○ DONE_STATUS
-    ○ BLOCKED_STATUS
+${spacing_header}${bold}Optional${base_color}
+    ${red_color}Note:${base_color} Place before loading of plugins
     ○ TO_DO_STATUS
+    ○ BLOCKED_STATUS
+    ○ IN_PROGRESS_STATUS
     ○ REVIEW_STATUS
     ○ QA_STATUS
     ○ QA_USER
+    ○ DONE_STATUS
 
-${spacing_header}${bold}Commands${return_color}
+${spacing_header}${bold}Commands${base_color}
 $help_functions
 $help_aliases
 "
