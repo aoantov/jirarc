@@ -30,7 +30,7 @@ function jre() {
   jira issue edit "$1"
 }
 
-if [ -n $review_status ]; then
+if [ -n "$review_status" ]; then
   # @desc: Move an issue to 'Review' status (REVIEW_STATUS needed)
   function jrrw() {
     if [ -z "$1" ]; then
@@ -64,21 +64,21 @@ function jracs() {
 }
 
 
-if [ -n $in_progress_status ]; then
+if [ -n "$in_progress_status" ]; then
   # @desc: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
   function jrpr() {
     jira issue move "$1" "$in_progress_status" && jira issue assign "$1" $(jira me)
   }
 fi
 
-if [ -n $blocked_status ]; then
+if [ -n "$blocked_status" ]; then
   # @desc: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
   function jrbk() {
     jira issue move "$1" "$blocked_status"
   }
 fi
 
-if [ -n $to_do_status ]; then
+if [ -n "$to_do_status" ]; then
   # @desc: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
   function jrtd() {
     if [ -z "$1" ]; then
@@ -100,7 +100,7 @@ if [ -n $to_do_status ]; then
   }
 fi
 
-if [ -n $done_status ]; then
+if [ -n "$done_status" ]; then
   # @desc: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
   function jrdn() {
     if [ -z "$1" ]; then
@@ -112,7 +112,7 @@ if [ -n $done_status ]; then
   }
 fi
 
-if [ -n $qa_status ] && [ -n $qa_user ]; then
+if [ -n "$qa_status" ] && [ -n "$qa_user" ]; then
   # @desc: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
   function jrqa() {
     if [ -z "$1" ]; then
