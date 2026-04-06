@@ -1,4 +1,4 @@
-PLUGIN_DIR="${0:A:h}"
+local PLUGIN_DIR="${0:A:h}"
 source "$PLUGIN_DIR/help.generated.zsh"
 
 empty_user="x"
@@ -30,15 +30,17 @@ function jre() {
   jira issue edit "$1"
 }
 
-# @desc: Move an issue to 'Review' status (REVIEW_STATUS needed)
-function jrrw() {
-  if [ -z "$1" ]; then
-    echo "Usage: jrrw <issue-key>"
-    return 1
-  fi
-
-  jira issue move "$1" "$review_status"
-}
+if [ -n "$review_status" ]; then
+  # @desc: Move an issue to 'Review' status (REVIEW_STATUS needed)
+  function jrrw() {
+    if [ -z "$1" ]; then
+      echo "Usage: jrrw <issue-key>"
+      return 1
+    fi
+  
+    jira issue move "$1" "$review_status"
+  }
+fi
 
 # @desc: Assign an issue to me
 function jram() {
@@ -61,55 +63,66 @@ function jracs() {
   jira sprint add $current_sprint_id "$1"
 }
 
-# @desc: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
-function jrtd() {
-  if [ -z "$1" ]; then
-    echo "Usage: jrtd <issue-key>"
-    return 1
-  fi
 
-  jira issue move "$1" "$to_do_status" && jira issue assign "$1" $(jira me)
-}
+if [ -n "$in_progress_status" ]; then
+  # @desc: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
+  function jrpr() {
+    jira issue move "$1" "$in_progress_status" && jira issue assign "$1" $(jira me)
+  }
+fi
 
-# @desc: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
-function jrpr() {
-  jira issue move "$1" "$in_progress_status" && jira issue assign "$1" $(jira me)
-}
+if [ -n "$blocked_status" ]; then
+  # @desc: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
+  function jrbk() {
+    jira issue move "$1" "$blocked_status"
+  }
+fi
 
-# @desc: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
-function jrbk() {
-  jira issue move "$1" "$blocked_status"
-}
+if [ -n "$to_do_status" ]; then
+  # @desc: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
+  function jrtd() {
+    if [ -z "$1" ]; then
+      echo "Usage: jrtd <issue-key>"
+      return 1
+    fi
+  
+    jira issue move "$1" "$to_do_status" && jira issue assign "$1" $(jira me)
+  }
 
-# @desc: List available issues in current sprint (TO_DO_STATUS needed)
-function jrav() {
-  jira sprint list -a "$empty_user" -s "$to_do_status" --current --plain
-}
+  # @desc: List available issues in current sprint (TO_DO_STATUS needed)
+  function jrav() {
+    jira sprint list -a "$empty_user" -s "$to_do_status" --current --plain
+  }
 
-# @desc: List available issues in current sprint (TO_DO_STATUS needed, interactive)
-function jriav() {
-  jira sprint list -a "$empty_user" -s "$to_do_status" --current
-}
+  # @desc: List available issues in current sprint (TO_DO_STATUS needed, interactive)
+  function jriav() {
+    jira sprint list -a "$empty_user" -s "$to_do_status" --current
+  }
+fi
 
-# @desc: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
-function jrdn() {
-  if [ -z "$1" ]; then
-    echo "Usage: jrdn <issue-key>"
-    return 1
-  fi
+if [ -n "$done_status" ]; then
+  # @desc: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
+  function jrdn() {
+    if [ -z "$1" ]; then
+      echo "Usage: jrdn <issue-key>"
+      return 1
+    fi
+  
+    jira issue move "$1" "$done_status" && jira issue assign "$1" "$empty_user"
+  }
+fi
 
-  jira issue move "$1" "$done_status" && jira issue assign "$1" "$empty_user"
-}
-
-# @desc: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
-function jrqa() {
-  if [ -z "$1" ]; then
-    echo "Usage: jrdn <issue-key>"
-    return 1
-  fi
-
-  jira issue move "$1" "$qa_status" && jira issue assign "$1" "$qa_user"
-}
+if [ -n "$qa_status" ] && [ -n "$qa_user" ]; then
+  # @desc: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
+  function jrqa() {
+    if [ -z "$1" ]; then
+      echo "Usage: jrqa <issue-key>"
+      return 1
+    fi
+  
+    jira issue move "$1" "$qa_status" && jira issue assign "$1" "$qa_user"
+  }
+fi
 
 
 # Aliases for jira commands
@@ -176,37 +189,3 @@ alias jrop='jira open'
 
 # @desc: Show help for JiraRC commands
 alias jrhelp='jr'
-
-
-# Unset functions if corresponding status IDs are not set
-if [ -z $done_status ]
-then
-  unset -f jrdn
-fi
-
-if [ -z $in_progress_status ]
-then
-  unset -f jrpr
-fi
-
-if [ -z $to_do_status ]
-then
-  unset -f jrtd
-  unset -f jrav 
-  unset -f jriav 
-fi
-
-if [ -z $review_status ]
-then
-  unset -f jrrw
-fi
-
-if [ -z $qa_status ] || [ -z $qa_user ]
-then
-  unset -f jrqa
-fi
-
-if [ -z $blocked_status ]
-then
-  unset -f jrbk
-fi

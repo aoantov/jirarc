@@ -33,12 +33,13 @@ plugins=(... jirarc)
 ##### Some commands are based on the column state. To rapidly move issues using some commands you have to define the following variables. All variables are optional
 
 ```
- export IN_PROGRESS_STATUS = '<In Progress Column Name>'
- export DONE_STATUS = '<Done Column Name>'
  export TO_DO_STATUS = '<To Do Column Name>'
+ export BLOCKED_STATUS= '<Blocked Column Name>'
+ export IN_PROGRESS_STATUS = '<In Progress Column Name>'
  export REVIEW_STATUS = '<Review Column Name>'
  export QA_STATUS = '<QA Column Name>'
  export QA_USER = '<QA User Account>'
+ export DONE_STATUS = '<Done Column Name>'
 ```
 
 ## Commands
@@ -48,9 +49,9 @@ plugins=(... jirarc)
 - jrrw: Move an issue to 'Review' status (REVIEW_STATUS needed)
 - jram: Assign an issue to me
 - jracs: Add issue to current sprint
-- jrtd: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
 - jrpr: Move an issue to 'In Progress' status and assign to me (IN_PROGRESS_STATUS needed)
 - jrbk: Move an issue back to 'Blocked' status (BLOCKED_STATUS needed)
+- jrtd: Move an issue to 'To Do' status and unassign (TO_DO_STATUS needed)
 - jrav: List available issues in current sprint (TO_DO_STATUS needed)
 - jriav: List available issues in current sprint (TO_DO_STATUS needed, interactive)
 - jrdn: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
