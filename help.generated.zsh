@@ -5,13 +5,13 @@
 
   [1mOptional[0m
     [31mNote:[0m Place before loading of plugins
-    ○ IN_PROGRESS_STATUS
-    ○ DONE_STATUS
-    ○ BLOCKED_STATUS
     ○ TO_DO_STATUS
+    ○ BLOCKED_STATUS
+    ○ IN_PROGRESS_STATUS
     ○ REVIEW_STATUS
     ○ QA_STATUS
     ○ QA_USER
+    ○ DONE_STATUS
 
   [1mCommands[0m
     ○ jrua: Unassign an issue (assign to empty user)
@@ -34,7 +34,6 @@
     ○ jriall: List all issues assigned to me (interactive)
     ○ jrcat: View details of a specific issue
     ○ jra: Assign an issue to a user
-    ○ jrd: Delete an issue
     ○ jrmv: Move an issue to a different status
     ○ jrrm: Remove (delete) an issue
     ○ jric: Create a new issue

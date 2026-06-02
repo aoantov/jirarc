@@ -151,9 +151,6 @@ alias jrcat='jira issue view'
 # @desc: Assign an issue to a user
 alias jra='jira issue assign'
 
-# @desc: Delete an issue
-alias jrd='jira issue delete'
-
 # @desc: Move an issue to a different status
 alias jrmv='jira issues move'
 

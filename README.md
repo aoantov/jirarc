@@ -64,7 +64,6 @@ plugins=(... jirarc)
 - jriall: List all issues assigned to me (interactive)
 - jrcat: View details of a specific issue
 - jra: Assign an issue to a user
-- jrd: Delete an issue
 - jrmv: Move an issue to a different status
 - jrrm: Remove (delete) an issue
 - jric: Create a new issue
