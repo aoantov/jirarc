@@ -59,8 +59,8 @@ function jracs() {
     return 1
   fi
 
-  local current_sprint_id = $(jira sprint list --state active --columns id --no-header | sed -n 's2p')
-  jira sprint add $current_sprint_id "$1"
+  local current_sprint_id=$(jira sprint list --state active --table --plain --no-headers | awk '{print $1}')
+  jira sprint add "$current_sprint_id" "$1"
 }
 
 
