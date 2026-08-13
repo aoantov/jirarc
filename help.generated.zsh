@@ -5,13 +5,13 @@
 
   [1mOptional[0m
     [31mNote:[0m Place before loading of plugins
-    ○ IN_PROGRESS_STATUS
-    ○ DONE_STATUS
-    ○ BLOCKED_STATUS
     ○ TO_DO_STATUS
+    ○ BLOCKED_STATUS
+    ○ IN_PROGRESS_STATUS
     ○ REVIEW_STATUS
     ○ QA_STATUS
     ○ QA_USER
+    ○ DONE_STATUS
 
   [1mCommands[0m
     ○ jrua: Unassign an issue (assign to empty user)
@@ -27,8 +27,8 @@
     ○ jrdn: Move an issue to 'Done' status and unassign (DONE_STATUS needed)
     ○ jrqa: Move an issue to 'QA' status and assign to QA user (QA_STATUS and QA_USER needed)
     ○ jrme: List issues in the current sprint assigned to me
-    ○ jrel: List epics in the current sprint
-    ○ jriel: List epics in the current sprint (interactive)
+    ○ jriel: List epics (interactive)
+    ○ jrel: List epics 
     ○ jrime: List issues in the current sprint assigned to me (interactive)
     ○ jrall: List all issues assigned to me
     ○ jriall: List all issues assigned to me (interactive)
@@ -41,7 +41,8 @@
     ○ jrls: List top 50 sprints
     ○ jrils: List top 50 sprints (interactive)
     ○ jrec: Create a new epic 
-    ○ jreu: Unassign epic from an issue
+    ○ jreu: Unassign an issue from an epic
+    ○ jrea: Assign issue to an epic
     ○ jrcm: Add a comment to an issue
     ○ jrcs: List issues in the current sprint
     ○ jrics: List issues in the current sprint (interactive)

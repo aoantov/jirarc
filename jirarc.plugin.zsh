@@ -130,11 +130,11 @@ fi
 # @desc: List issues in the current sprint assigned to me
 alias jrme='jira sprint list --current --plain -a $(jira me)'
 
-# @desc: List epics in the current sprint
-alias jrel='jira epic list --table --plain'
-
-# @desc: List epics in the current sprint (interactive)
+# @desc: List epics (interactive)
 alias jriel='jira epic list'
+
+# @desc: List epics 
+alias jrel='jira epic list --plain --table'
 
 # @desc: List issues in the current sprint assigned to me (interactive)
 alias jrime='jira sprint list --current -a $(jira me)'
@@ -172,8 +172,11 @@ alias jrils='jira sprint list'
 # @desc: Create a new epic 
 alias jrec='jira epic add'
 
-# @desc: Unassign epic from an issue
+# @desc: Unassign an issue from an epic
 alias jreu='jira epic remove'
+
+# @desc: Assign issue to an epic
+alias jrea='jira epic add'
 
 # @desc: Add a comment to an issue
 alias jrcm='jira issue comment add'
