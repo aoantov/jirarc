@@ -32,7 +32,7 @@ plugins=(... jirarc)
 
 ##### Some commands are based on the column state. To rapidly move issues using some commands you have to define the following variables. All variables are optional
 
-<span style="color:red">Note:</span> If your Jira has restrictions on movement of issues the rapid movement commands will not work.
+$\color{red}{\text{Note:}}$ If your Jira has restrictions on movement of issues the rapid movement commands will not work.
 
 ```
  export TO_DO_STATUS = '<To Do Column Name>'
