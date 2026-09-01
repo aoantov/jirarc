@@ -5,7 +5,7 @@
 ## Requirements
 
 - [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)
-- [Jira CLI](https://github.com/ankitpokhrel/jira-cli)
+- [Jira CLI](https://github.com/ankitpokhrel/jira-cli) (>= v1.7.0)
 
 ## Installation
 
