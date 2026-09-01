@@ -52,6 +52,66 @@ function jram() {
   jira issue assign "$1" $(jira me)
 }
 
+# @desc: Link issue as blocking another issue
+function jrlbk() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: jrlbk <blocked-key> <blocking-key>"
+    return 1
+  fi
+
+  jira issue link "$1" "$2" "Blocks"
+}
+
+# @desc: Link issue as duplicate of another issue
+function jrldp() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: jrldp <original-key> <duplicate-key>"
+    return 1
+  fi
+
+  jira issue link "$1" "$2" "Duplicate"
+}
+
+# @desc: Link issue as clone of another issue
+function jrlcn() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: jrlcn <original-key> <clone-key>"
+    return 1
+  fi
+
+  jira issue link "$1" "$2" "Cloners"
+}
+
+# @desc: Link issue as connected to another issue
+function jrlco() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: jrlco <from-key> <to-key>"
+    return 1
+  fi
+
+  jira issue link "$1" "$2" "Discovery-Connected"
+}
+
+# @desc: Link issue relating to another issue
+function jrlrt() {
+  if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: jrlrt <first-key> relates to <second-key>"
+    return 1
+  fi
+
+  jira issue link "$1" "$2" "Relates"
+}
+
+# @desc: Add me to the watch list of an issue
+function jrawme() {
+  if [ -z "$1" ]; then
+    echo "Usage: jrawme <issue-key>"
+    return 1
+  fi
+
+  jira issue watch "$1" "$(jira me)"
+}
+
 # @desc: Add issue to current sprint
 function jracs() {
   if [ -z "$1" ]; then
@@ -133,6 +193,12 @@ alias jrme='jira sprint list --current --plain -a $(jira me)'
 # @desc: List epics (interactive)
 alias jriel='jira epic list'
 
+# @desc: Add user to watch list of an issue
+alias jraw='jira issue watch'
+
+# @desc: Clone an issue
+alias jrcn='jira issue clone'
+
 # @desc: List epics 
 alias jrel='jira epic list --plain --table'
 
@@ -161,7 +227,7 @@ alias jrmv='jira issues move'
 alias jrrm="jira issues delete"
 
 # @desc: Create a new issue
-alias jric='jira issues create'
+alias jrc='jira issues create'
 
 # @desc: List top 50 sprints
 alias jrls='jira sprint list --table --plain'
@@ -176,7 +242,10 @@ alias jrec='jira epic add'
 alias jreu='jira epic remove'
 
 # @desc: Assign issue to an epic
-alias jrea='jira epic add'
+alias jrae='jira epic add'
+
+# @desc: Link issue to another issue
+alias jrlk='jira issue link'
 
 # @desc: Add a comment to an issue
 alias jrcm='jira issue comment add'
