@@ -235,6 +235,9 @@ alias jrls='jira sprint list --table --plain'
 # @desc: List top 50 sprints (interactive)
 alias jrils='jira sprint list'
 
+# @desc: List releases (interactive)
+alias jrilr='jira releases list'
+
 # @desc: Create a new epic 
 alias jrec='jira epic add'
 

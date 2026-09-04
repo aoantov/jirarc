@@ -80,6 +80,7 @@ $\color{red}{\text{Note:}}$ If your Jira has restrictions on movement of issues 
 - jrc: Create a new issue
 - jrls: List top 50 sprints
 - jrils: List top 50 sprints (interactive)
+- jrilr: List releases (interactive)
 - jrec: Create a new epic
 - jreu: Unassign an issue from an epic
 - jrae: Assign issue to an epic
